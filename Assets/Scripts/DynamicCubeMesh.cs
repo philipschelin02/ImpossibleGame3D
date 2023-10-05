@@ -15,7 +15,7 @@ public class DynamicCubeMesh : MonoBehaviour
         Calculate();
     }
 
-    public void Calculate()
+    private void Calculate()
     {
         if (_currentScale == transform.localScale) return;
         _currentScale = transform.localScale;
@@ -33,13 +33,11 @@ public class DynamicCubeMesh : MonoBehaviour
 
     private Mesh GetMesh()
     {
-        Mesh mesh;
-
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         var meshFilter = GetComponent<MeshFilter>();
         var meshCopy = Instantiate(meshFilter.sharedMesh);
-        mesh = meshFilter.mesh = meshCopy;
+        var mesh = meshFilter.mesh = meshCopy;
 
         #else
         
